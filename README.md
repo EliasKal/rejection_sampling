@@ -17,12 +17,9 @@ int a = rand();
 int b = rand();
 int c = rand();
 cout << a << ", " << b << ", " << c << endl;
-```
 
-In my computer, the above code produces the following output.
-
-```
-1804289383, 846930886, 1681692777
+// Output (in my computer; it may differ in yours):
+// 1804289383, 846930886, 1681692777
 ```
 
 We will use the `rand()` function to create our first very useful sampling function: a function to sample from the uniform distribution, with arbitrary limits. Sampling from the standard uniform distribution means drawing a random real number in range `[a, b]`. When `a = 0` and `b = 1`, the uniform distribution is called the *standard uniform distribution*.
@@ -45,12 +42,8 @@ double a = runif();
 double c = runif();
 double b = runif();
 cout << a << ", " << b << ", " << c << endl;
-```
 
-Which outputs the following:
-
-```
-0.840188, 0.783099, 0.394383
+// 0.840188, 0.783099, 0.394383
 ```
 
 To make it more general, we can add two arguments in our function, so that we can sample from a uniform distribution in the arbitrary range `[a, b]`, instead of the range `[0, 1]`. To do so, we first take a number in the range `[0, 1]`. Then, we scale it by `(b - a)`, so that the resulting number is in the range `[0, b - a]`. Finally, we add `a`, so that the resulting number is in the range `[a, b]`.
@@ -69,12 +62,83 @@ double a = runif(3, 5);
 double c = runif(3, 5);
 double b = runif(3, 5);
 cout << a << ", " << b << ", " << c << endl;
+
+// 4.68038, 4.5662, 3.78877
 ```
 
-Which outputs:
+We will usually want a lot of samples drawn from a distribution, so we will usually create an array of samples. For arrays, we will use the STL `vector` template, available in the `<vector>` header.
 
-```
-4.68038, 4.5662, 3.78877
+```c++
+int n = 100;
+vector<double> samples(n);
+for (int i = 0; i < n; i++) {
+    samples[i] = runif(3, 5);
+}
+for (int i = 0; i < n; i++) {
+    cout << samples[i] << endl;
+}
+
+// 4.68038
+// 3.78877
+// 4.5662
+// ...
+// 4.62953
+// 4.36844
+// 4.82194
 ```
 
 Sampling from an arbitrary uniform distribution is very useful and will be used as a component in more complex sampling functions.
+
+
+## Plotting a distribution
+
+In order to see visually the distribution of the samples we draw, we can create a histogram. A histogram is a bar chart, where the height of each bar is the number of samples that are between a small range of values, called a *bin*. The domain of the sample values is first split into a desired number of consecutive bins and then the samples that fall in each bin are counted.
+
+We will use the following function for drawing a histogram.
+
+```c++
+void printHist(const vector<double> &x, int nBins, int plotWidth)
+{
+    double minVal = min(x);
+    double maxVal = max(x);
+    double binSize = (maxVal - minVal) / nBins;
+    // count bins
+    vector<double> counts(nBins);
+    for (int i = 0; i < x.size(); i++) {
+        int binIdx = (int)((x[i] - minVal) / binSize);
+        if (binIdx >= nBins)
+            binIdx = nBins - 1;
+        counts[binIdx]++;
+    }
+    // draw bins
+    double maxCount = max(counts);
+    for (int i = 0; i < nBins; i++) {
+        printf("%5.2f ", minVal + i * binSize);
+        for (int j = 0; j < (int)((counts[i] / maxCount) * plotWidth); j++)
+            cout << "*";
+        cout << endl;
+    }
+}
+```
+
+As an example, we can use this function to plot the distribution of several uniform samples.
+
+```c++
+int n = 100;
+vector<double> samples(n);
+for (int i = 0; i < n; i++) {
+    samples[i] = runif(3, 5);
+}
+printHist(samples, 10, 16);
+
+// 3.03 *********
+// 3.23 ********
+// 3.43 ***********
+// 3.62 *************
+// 3.82 ******
+// 4.02 ***********
+// 4.21 *************
+// 4.41 **********
+// 4.60 *************
+// 4.80 ****************
+```
