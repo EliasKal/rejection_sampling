@@ -56,7 +56,7 @@ double runif(double a, double b)
 
 int main(int argc, char **argv)
 {
-    int n = 100;
+    int n = 1000;
     vector<double> samples(n);
     for (int i = 0; i < n; i++) {
         samples[i] = runif(3, 5);

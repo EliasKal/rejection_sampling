@@ -142,3 +142,45 @@ printHist(samples, 10, 16);
 // 4.60 *************
 // 4.80 ****************
 ```
+
+The more samples we take, the more the histogram will resemble the true distribution of the samples. In the uniform distribution, the probability density function is just a constant value.
+
+```c++
+int n = 1000;
+vector<double> samples(n);
+for (int i = 0; i < n; i++) {
+    samples[i] = runif(3, 5);
+}
+printHist(samples, 10, 16);
+
+// 3.00 ***********
+// 3.20 *************
+// 3.40 ************
+// 3.60 ************
+// 3.80 ***********
+// 4.00 ************
+// 4.20 ****************
+// 4.40 ************
+// 4.60 *************
+// 4.80 ************
+```
+
+```c++
+int n = 10000;
+vector<double> samples(n);
+for (int i = 0; i < n; i++) {
+    samples[i] = runif(3, 5);
+}
+printHist(samples, 10, 16);
+
+// 3.00 ***************
+// 3.20 ***************
+// 3.40 ***************
+// 3.60 ***************
+// 3.80 ***************
+// 4.00 ****************
+// 4.20 ***************
+// 4.40 ***************
+// 4.60 ***************
+// 4.80 ***************
+```
