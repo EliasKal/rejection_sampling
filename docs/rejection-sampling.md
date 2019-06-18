@@ -22,7 +22,7 @@ cout << a << ", " << b << ", " << c << endl;
 // 1804289383, 846930886, 1681692777
 ```
 
-We will use the `rand()` function to create our first very useful sampling function: a function to sample from the uniform distribution, with arbitrary limits. Sampling from the standard uniform distribution means drawing a random real number in range $[a, b]$. When `a = 0` and `b = 1`, the uniform distribution is called the *standard uniform distribution*.
+We will use the `rand()` function to create our first very useful sampling function: a function to sample from the uniform distribution, with arbitrary limits. Sampling from the standard uniform distribution means drawing a random real number in range $$[a, b]$$. When `a = 0` and `b = 1`, the uniform distribution is called the *standard uniform distribution*.
 
 So let's create this function. We will first create a function `runif()` to draw from the standard uniform distribution.
 
