@@ -22,11 +22,12 @@ cout << a << ", " << b << ", " << c << endl;
 // 1804289383, 846930886, 1681692777
 ```
 
-We will use the `rand()` function to create our first very useful sampling function: a function to sample from the uniform distribution, with arbitrary limits. Sampling from the standard uniform distribution means drawing a random real number in range `[a, b]`. When `a = 0` and `b = 1`, the uniform distribution is called the *standard uniform distribution*.
+We will use the `rand()` function to create our first very useful sampling function: a function to sample from the uniform distribution, with arbitrary limits. Sampling from the standard uniform distribution means drawing a random real number in range $[a, b]$. When `a = 0` and `b = 1`, the uniform distribution is called the *standard uniform distribution*.
 
 So let's create this function. We will first create a function `runif()` to draw from the standard uniform distribution.
 
 ```c++
+// Samples from a uniform distribution in [0, 1].
 double runif()
 {
     return rand() / (double)RAND_MAX;
@@ -49,6 +50,7 @@ cout << a << ", " << b << ", " << c << endl;
 To make it more general, we can add two arguments in our function, so that we can sample from a uniform distribution in the arbitrary range `[a, b]`, instead of the range `[0, 1]`. To do so, we first take a number in the range `[0, 1]`. Then, we scale it by `(b - a)`, so that the resulting number is in the range `[0, b - a]`. Finally, we add `a`, so that the resulting number is in the range `[a, b]`.
 
 ```c++
+// Samples from a uniform distribution in [a, b].
 double runif(double a, double b)
 {
     return (rand() / (double)RAND_MAX) * (b - a) + a;
@@ -97,6 +99,7 @@ In order to see visually the distribution of the samples we draw, we can create 
 We will use the following function for drawing a histogram.
 
 ```c++
+// Plots a histogram of the elements of x.
 void printHist(const vector<double> &x, int nBins, int plotWidth)
 {
     double minVal = min(x);
