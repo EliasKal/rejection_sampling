@@ -1,3 +1,5 @@
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 # Rejection sampling
 
 Rejection sampling is a simple method from sampling from an arbitrary probability distribution, when we know the probability density function.
