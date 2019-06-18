@@ -24,7 +24,7 @@ cout << a << ", " << b << ", " << c << endl;
 // 1804289383, 846930886, 1681692777
 ```
 
-We will use the `rand()` function to create our first very useful sampling function: a function to sample from the uniform distribution, with arbitrary limits. Sampling from the standard uniform distribution means drawing a random real number in range $$[a, b]$$. When `a = 0` and `b = 1`, the uniform distribution is called the *standard uniform distribution*.
+We will use the `rand()` function to create our first very useful sampling function: a function to sample from the uniform distribution, with arbitrary limits. Sampling from the standard uniform distribution means drawing a random real number in range $$[a, b]$$. When $$a = 0$$ and $$b = 1$$, the uniform distribution is called the *standard uniform distribution*.
 
 So let's create this function. We will first create a function `runif()` to draw from the standard uniform distribution.
 
@@ -36,7 +36,7 @@ double runif()
 }
 ```
 
-This function just calls `rand()` and divides the returned number by `RAND_MAX` in order to limit the result in the range `[0, 1]`. The necessary type conversion to `double` is made, so that a real number is returned.
+This function just calls `rand()` and divides the returned number by `RAND_MAX` in order to limit the result in the range $$[0, 1]$$. The necessary type conversion to `double` is made, so that a real number is returned.
 
 Calling this function a few times can be done like this:
 
@@ -49,7 +49,7 @@ cout << a << ", " << b << ", " << c << endl;
 // 0.840188, 0.783099, 0.394383
 ```
 
-To make it more general, we can add two arguments in our function, so that we can sample from a uniform distribution in the arbitrary range `[a, b]`, instead of the range `[0, 1]`. To do so, we first take a number in the range `[0, 1]`. Then, we scale it by `(b - a)`, so that the resulting number is in the range `[0, b - a]`. Finally, we add `a`, so that the resulting number is in the range `[a, b]`.
+To make it more general, we can add two arguments in our function, so that we can sample from a uniform distribution in the arbitrary range $$[a, b]$$, instead of the range $$[0, 1]$$. To do so, we first take a number in the range $$[0, 1]$$. Then, we scale it by $$b - a$$, so that the resulting number is in the range $$[0, b - a]$$. Finally, we add $$a$$, so that the resulting number is in the range $$[a, b]$$.
 
 ```c++
 // Samples from a uniform distribution in [a, b].
@@ -148,7 +148,7 @@ printHist(samples, 10, 16);
 // 4.80 ****************
 ```
 
-The more samples we take, the more the histogram will resemble the true distribution of the samples. In the uniform distribution, the probability density function is just a constant value.
+The more samples we take, the more the histogram will resemble the true distribution of the samples. In the uniform distribution, the probability density function is just a constant value. In the following, we use 1000 samples.
 
 ```c++
 int n = 1000;
@@ -169,6 +169,8 @@ printHist(samples, 10, 16);
 // 4.60 *************
 // 4.80 ************
 ```
+
+And in the following, we use 10000 samples.
 
 ```c++
 int n = 10000;
